@@ -127,28 +127,22 @@ void figure_explosion_cloud_action(figure *f)
 
 static int javelin_defense(formation *m)
 {
-    if (!m->is_halted) {
-	return 0;
-    }
     if (m->figure_type != FIGURE_FORT_JAVELIN) {
-	return 0;
+	    return 0;
     }
     if (m->layout != FORMATION_SINGLE_LINE_1 && m->layout != FORMATION_SINGLE_LINE_2) {
-	return 0;
+	    return 0;
     }
     return -2;
 }
 
 static int archer_defense(formation *m)
 {
-    if (!m->is_halted) {
-	return 0;
-    }
     if (m->figure_type != FIGURE_FORT_ARCHER) {
-	return 0;
+	    return 0;
     }
     if (m->layout != FORMATION_SINGLE_LINE_1 && m->layout != FORMATION_SINGLE_LINE_2) {
-	return 0;
+	    return 0;
     }
     return -2;
 }
