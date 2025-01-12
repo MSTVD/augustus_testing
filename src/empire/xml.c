@@ -334,7 +334,7 @@ static int xml_start_city(void)
     city_obj->obj.image_id = image_group(GROUP_EMPIRE_CITY_TRADE);
     city_obj->trade_route_cost = 500;
 
-    static const char *city_types[8] = { "roman", "ours", "trade", "future_trade", "distant", "vulnerable", "future_roman", "rome"};
+    static const char *city_types[12] = { "roman", "ours", "trade", "future_trade", "distant", "vulnerable", "future_roman", "rome", "distant_sea_trade", "distant_land_trade", "distant_town", "distant_village"};
     static const char *trade_route_types[2] = { "land", "sea" };
 
     const char *name = xml_parser_get_attribute_string("name");
@@ -342,7 +342,7 @@ static int xml_start_city(void)
         string_copy(string_from_ascii(name), city_obj->city_custom_name, sizeof(city_obj->city_custom_name));
     }
 
-    int city_type = xml_parser_get_attribute_enum("type", city_types, 8, EMPIRE_CITY_DISTANT_ROMAN);
+    int city_type = xml_parser_get_attribute_enum("type", city_types, 12, EMPIRE_CITY_DISTANT_ROMAN);
     if (city_type < EMPIRE_CITY_DISTANT_ROMAN) {
         city_obj->city_type = EMPIRE_CITY_TRADE;
     } else {
@@ -365,6 +365,18 @@ static int xml_start_city(void)
             break;
         case EMPIRE_CITY_ROME:
             city_obj->obj.image_id = assets_lookup_image_id(ASSET_CITY_ROME);
+            break;
+        case EMPIRE_CITY_SEA_TRADE_DISTANT:
+            city_obj->obj.image_id = assets_lookup_image_id(ASSET_SEA_TRADE_DISTANT);
+            break;
+        case EMPIRE_CITY_LAND_TRADE_DISTANT:
+            city_obj->obj.image_id = assets_lookup_image_id(ASSET_LAND_TRADE_DISTANT);
+            break;
+        case EMPIRE_CITY_DISTANT_FOREIGN_TOWN:
+            city_obj->obj.image_id = assets_lookup_image_id(ASSET_DISTANT_TOWN);
+            break;
+        case EMPIRE_CITY_DISTANT_FOREIGN_VILLAGE:
+            city_obj->obj.image_id = assets_lookup_image_id(ASSET_DISTANT_VILLAGE);
             break;
         default:
             city_obj->obj.image_id = image_group(GROUP_EMPIRE_CITY_TRADE);

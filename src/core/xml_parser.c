@@ -58,7 +58,12 @@ int xml_parser_compare_multiple(const char *string, const char *match)
     const char *next;
     do {
         next = strchr(string, '|');
-        size_t length = next ? (size_t) (next - string) : strlen(string);
+        size_t length = strlen(match);
+        if (next && next - string > length) {
+            length = next - string;
+        } else if (!next && strlen(string) > length) {
+            length = strlen(string);
+        }
         if (strncmp(string, match, length) == 0) {
             return 1;
         }
